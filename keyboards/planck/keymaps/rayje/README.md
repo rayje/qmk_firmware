@@ -16,5 +16,5 @@ Move to the planck directory then just run `make dfu` like:
 
 ### 2
 
-[![keyboard layout](https://github.com/rayje/qmk_firmware/raw/master/keyboards/planck/keymaps/rayje/layer1.jpg)](https://github.com/rayje/qmk_firmware/raw/master/keyboards/planck/keymaps/rayje/layer1.jpg)
+[![keyboard layout](https://github.com/rayje/qmk_firmware/raw/master/keyboards/planck/keymaps/rayje/layer2.jpg)](https://github.com/rayje/qmk_firmware/raw/master/keyboards/planck/keymaps/rayje/layer2.jpg)
 
