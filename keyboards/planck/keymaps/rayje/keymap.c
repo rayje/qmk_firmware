@@ -18,26 +18,15 @@ enum planck_keycodes {
   COLEMAK,
   LOWER,
   RAISE,
-  BACKLIT,
-  EXT_PLV
+  GOODBYE,
+  TSCALE,
+  CLOSE_ENC,
 };
 
 enum macro_keycodes {
   KC_ALT_TAB,
   KC_CMD_TAB,
-  KC_CTL_TAB,
-  KC_CMD_SLSH,
-  KC_AG_FIND,
-  KC_AG_AGAIN,
-  KC_AG_UNDO,
-  KC_AG_CUT,
-  KC_AG_COPY,
-  KC_AG_PASTE,
-  KC_AG_DESK_L,
-  KC_AG_DESK_R,
-  KC_AG_TAB_C,
-  KC_AG_TAB_N,
-  KC_AG_TAB_R,
+  KC_CMS_TAB,
 };
 
 #define _______ KC_TRNS
@@ -45,7 +34,7 @@ enum macro_keycodes {
 
 // Custom macros
 #define CTL_ESC     CTL_T(KC_ESC)               // Tap for Esc, hold for Ctrl
-#define CTL_TAB     CTL_T(KC_TAB)               // Tap for Tab, hold for Ctrl
+#define CTL_TAB     MT(MOD_LCTL, KC_TAB)               // Tap for Tab, hold for Ctrl
 #define SFT_ENT     SFT_T(KC_ENT)               // Tap for Enter, hold for Shift
 #define HPR_TAB     ALL_T(KC_TAB)               // Tap for Tab, hold for Hyper
 #define GUI_SEM     GUI_T(KC_SCLN)              // Tap for Semicolon, hold for GUI
@@ -55,19 +44,7 @@ enum macro_keycodes {
 #define LT_MC(kc)   LT(_MOUSECURSOR, kc)        // L-ayer T-ap M-ouse C-ursor
 #define ALT_TAB     M(KC_ALT_TAB)               // Macro for Alt-Tab
 #define CMD_TAB     M(KC_CMD_TAB)               // Macro for Cmd-Tab
-#define CTL_TAB     M(KC_CTL_TAB)               // Macro for Ctl-Tab
-#define CMD_SLSH    M(KC_CMD_SLSH)              // Macro for Cmd-Slash (personal shortcut to toggle iTerm2 visibility)
-#define AG_FIND     M(KC_AG_FIND)               // Macros for Cmd-[x] vs Ctrl-[x] based on current AG_NORM or AG_SWAP settings
-#define AG_AGAIN    M(KC_AG_AGAIN)
-#define AG_UNDO     M(KC_AG_UNDO)
-#define AG_CUT      M(KC_AG_CUT)
-#define AG_COPY     M(KC_AG_COPY)
-#define AG_PASTE    M(KC_AG_PASTE)
-#define AG_D_L      M(KC_AG_DESK_L)             // For Virtual Desktop Switching: Left, and
-#define AG_D_R      M(KC_AG_DESK_R)             //                                Right
-#define AG_T_C      M(KC_AG_TAB_C)              // For Chrome, etc. Tab Close,
-#define AG_T_N      M(KC_AG_TAB_N)              //                  Tab New, and
-#define AG_T_R      M(KC_AG_TAB_R)              //                  Tab Reopen Closed
+#define CMS_TAB     M(KC_CMS_TAB)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
@@ -78,14 +55,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |----------+------+------+-------+------+------|------+-------+-------+------+------+-------|
  * | Shift    |  Z   |   X  |   C   |   V  |   B  |   N  |   M   |   ,   |   .  |   /  | Equal |
  * |----------+------+------+-------+------+------+------+-------+-------+------+------+-------|
- * | Tab      | LAlt |      | Lower | Bksp | GUI  | Ent  | Space | Raise | Vol- | Vol+ |       |
+ * | Tab      | LAlt | MO4  | Lower | Bksp | GUI  | Ent  | Space | Raise | Vol- | Vol+ |       |
  * `-------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = { /* Qwerty */
   {KC_ESC,    KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,     KC_P,     KC_MINS},
-  {KC_LCTL,   KC_A,    KC_S, LT_MC(KC_D), KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,     KC_SCLN,  KC_QUOT},
+  {CTL_TAB,   KC_A,    KC_S, LT_MC(KC_D), KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,     KC_SCLN,  KC_QUOT},
   {KC_LSFT,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH,  KC_EQL },
-  {KC_TAB,    KC_LGUI, KC_TRNS, LOWER, KC_BSPC, KC_LALT, KC_ENT,   LT_TC,    RAISE,   KC_VOLD,  KC_VOLU,  KC_TRNS}
+  {KC_TAB,    KC_LGUI, MO(4), LOWER, KC_BSPC, KC_LALT, KC_ENT,   LT_TC,    RAISE,   KC_VOLD,  KC_VOLU,     MO(6)}
 },
 /* Colemak
  * ,----------------------------------------------------------------------------------------.
@@ -102,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {HPR_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_MINS},
   {CTL_TAB, KC_A,    KC_R, LT_MC(KC_S),KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT},
   {KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, SFT_ENT},
-  {KC_TAB,  KC_RGUI, KC_LALT, KC_LGUI, LOWER,   LT_TC,   LT_TC,   RAISE,   KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY}
+  {KC_TAB,  KC_LGUI, MO(4),  LOWER, KC_BSPC, KC_LALT,  KC_ENT,   LT_TC,    RAISE,   KC_VOLD, KC_VOLU, KC_TRNS}
 },
 /* Lower
  * ,------------------------------------------------------------------------------------.
@@ -133,10 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `------------------------------------------------------------------------------------'
  */
 [_RAISE] = {
-  {KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,       KC_0,       S(KC_MINS)},
-  {S(KC_GRV), KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS, S(KC_LBRC), S(KC_RBRC), KC_PIPE},
-  {_______,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_MINS, KC_EQL,  _______,    KC_UP,      KC_BSLS},
-  {_______,   _______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT,    KC_DOWN,    KC_RIGHT}
+  {KC_TAB,    KC_1,   KC_2,  KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,       KC_0,       S(KC_MINS)},
+  {KC_GRV,    KC_F1,  KC_F2, KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS, KC_PLUS, S(KC_LBRC), S(KC_RBRC), KC_PIPE},
+  {_______,   KC_F7,  KC_F8, KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_MINS, KC_EQL,  _______,    KC_UP,      KC_BSLS},
+  {_______,  _______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN,    KC_RIGHT}
 },
 /* TouchCursor layer (http://martin-stone.github.io/touchcursor/) plus personal customizations
  * ,-----------------------------------------------------------------------------------.
@@ -154,9 +131,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_TOUCHCURSOR] = {
-  {ALT_TAB, CMD_TAB, CTL_TAB, KC_LGUI, KC_LSFT, KC_TILD, KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_BSPC, _______},
-  {_______, KC_LALT, KC_SPC,  AG_T_C, AG_FIND,AG_AGAIN, KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, AG_D_L,  AG_D_R },
-  {_______, AG_UNDO, AG_CUT,  AG_COPY, AG_PASTE,KC_GRV,  KC_PGDN, KC_DEL,  AG_T_N,  AG_T_R,  CMD_SLSH,_______},
+  {CMD_TAB, CMS_TAB, CTL_TAB, KC_LGUI, KC_LSFT, KC_TILD,  KC_INS, KC_HOME,   KC_UP,  KC_END, KC_BSPC, _______},
+  {_______, KC_LALT, KC_SPC,  _______, _______,_______,  KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, _______, _______},
+  {_______, _______, _______,  _______, _______,KC_GRV,  KC_PGDN,  KC_DEL, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -191,20 +168,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = {
   {_______, _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL},
-  {_______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, _______,  _______,  _______},
-  {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   RESET}
+  {_______, _______, _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK, GOODBYE, TSCALE,  CLOSE_ENC},
+  {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______,   RESET},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 };
 
 #ifdef AUDIO_ENABLE
 
-float tone_startup[][2]    = SONG(STARTUP_SOUND);
-float tone_qwerty[][2]     = SONG(QWERTY_SOUND);
-float tone_colemak[][2]    = SONG(COLEMAK_SOUND);
-float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
-
+float tone_startup[][2] = SONG(STARTUP_SOUND);
+float tone_qwerty[][2]  = SONG(QWERTY_SOUND);
+float tone_colemak[][2] = SONG(COLEMAK_SOUND);
+float music_scale[][2]  = SONG(MUSIC_SCALE_SOUND);
 float tone_goodbye[][2] = SONG(GOODBYE_SOUND);
+float close_encounters[][2] = SONG(CLOSE_ENCOUNTERS_5_NOTE);
 #endif
 
 void persistant_default_layer_set(uint16_t default_layer) {
@@ -252,6 +229,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case TSCALE:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(music_scale, false, 0);
+        #endif
+      }
+      return false;
+      break;
+    case GOODBYE:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(tone_goodbye, false, 0);
+        #endif
+      }
+      return false;
+      break;
+    case CLOSE_ENC:
+      if (record->event.pressed) {
+        #ifdef AUDIO_ENABLE
+          PLAY_NOTE_ARRAY(close_encounters, false, 0);
+        #endif
+      }
+      return false;
+      break;
   }
   return true;
 }
@@ -261,54 +262,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  */
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
-    if (!eeconfig_is_enabled()) {
-      eeconfig_init();
-    }
-
-    bool use_cmd = true;    // Use, for example, Cmd-Tab, Cmd-C, Cmd-V, etc.
-    // Compare to MAGIC_SWAP_ALT_GUI and MAGIC_UNSWAP_ALT_GUI configs, set in:
-    // quantum/quantum.c
-    if(keymap_config.swap_lalt_lgui == 1 && keymap_config.swap_ralt_rgui == 1) {
-      use_cmd = false;      // ... or, Alt-Tab, Ctrl-C, Ctrl-V, etc.
-    }
-
     switch (id) {
       case KC_ALT_TAB:
-        if(use_cmd) { return (record->event.pressed ? MACRO( D(LALT),  D(TAB), END ) : MACRO( U(TAB), END )); }
-        else        { return (record->event.pressed ? MACRO( D(LGUI),  D(TAB), END ) : MACRO( U(TAB), END )); }
+        return (record->event.pressed ? MACRO( D(LALT),  D(TAB), END ) : MACRO( U(TAB), END ));
       case KC_CMD_TAB:
-        if(use_cmd) { return (record->event.pressed ? MACRO( D(LGUI),  D(TAB), END ) : MACRO( U(TAB), END )); }
-        else        { return (record->event.pressed ? MACRO( D(LALT),  D(TAB), END ) : MACRO( U(TAB), END )); }
-
-      case KC_CTL_TAB:
-        return (record->event.pressed ? MACRO( D(LCTRL), D(TAB), END ) : MACRO( U(TAB), END ));
-      case KC_CMD_SLSH:
-        return (record->event.pressed ? MACRO( D(LGUI),  D(SLSH),END ) : MACRO( U(SLSH),END ));
-
-      case KC_AG_FIND:
-        return use_cmd ? MACRODOWN( D(LGUI), T(F), END ) : MACRODOWN( D(LCTRL), T(F), END );
-      case KC_AG_AGAIN:
-        return use_cmd ? MACRODOWN( D(LGUI), T(G), END ) : MACRODOWN( D(LCTRL), T(G), END );
-      case KC_AG_UNDO:
-        return use_cmd ? MACRODOWN( D(LGUI), T(Z), END ) : MACRODOWN( D(LCTRL), T(Z), END );
-      case KC_AG_CUT:
-        return use_cmd ? MACRODOWN( D(LGUI), T(X), END ) : MACRODOWN( D(LCTRL), T(X), END );
-      case KC_AG_COPY:
-        return use_cmd ? MACRODOWN( D(LGUI), T(C), END ) : MACRODOWN( D(LCTRL), T(C), END );
-      case KC_AG_PASTE:
-        return use_cmd ? MACRODOWN( D(LGUI), T(V), END ) : MACRODOWN( D(LCTRL), T(V), END );
-
-      case KC_AG_DESK_L:
-        return use_cmd ? MACRODOWN( D(LGUI), D(LCTRL), T(SCLN), END ) : MACRODOWN( D(LALT), D(LCTRL), T(SCLN), END );
-      case KC_AG_DESK_R:
-        return use_cmd ? MACRODOWN( D(LGUI), D(LCTRL), T(QUOT), END ) : MACRODOWN( D(LALT), D(LCTRL), T(QUOT), END );
-
-      case KC_AG_TAB_C:
-        return use_cmd ? MACRODOWN( D(LGUI),            T(W), END ) : MACRODOWN( D(LCTRL),            T(W), END );
-      case KC_AG_TAB_N:
-        return use_cmd ? MACRODOWN( D(LGUI),            T(T), END ) : MACRODOWN( D(LCTRL),            T(T), END );
-      case KC_AG_TAB_R:
-        return use_cmd ? MACRODOWN( D(LGUI), D(LSHIFT), T(T), END ) : MACRODOWN( D(LCTRL), D(LSHIFT), T(T), END );
+        return (record->event.pressed ? MACRO( D(LGUI),  D(TAB), END ) : MACRO( U(TAB), END ));
     }
 
     return MACRO_NONE;
