@@ -2,9 +2,9 @@ Planck keyboard firmware
 ========================
 
 ## Build
-Move to this directory then just run `make` like:
+Move to the planck directory then just run `make dfu` like:
 
-    $ make rayje
+    $ KEYMAP=rayje make dfu
 
 ### "Querty"
 
