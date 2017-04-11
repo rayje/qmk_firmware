@@ -170,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *
  */
 [_MS] = KEYMAP( 
-  KC_CAPS, _______, _______, KC_MSTP, KC_MPLY,                   KC_MUTE, KC_BTN1, KC_MS_U, KC_BTN2, _______,
+  KC_CAPS, _______, _______, KC_MSTP, KC_MPLY,                   KC_MUTE, KC_BTN1, KC_MS_U, KC_BTN2, KC_MINS,
   KC_TAB,  _______, _______, _______, _______,                   KC_VOLU, KC_MS_L, KC_MS_D, KC_MS_R, S(KC_QUOT),
   KC_LSFT, _______, _______, _______, _______,                   KC_VOLD, KC_WH_U, _______, KC_WH_D, KC_QUOT,
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -191,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *
  */
 [_TC] = KEYMAP(
-  CMD_TAB,   ALTSH_TAB, _______, _______, _______,                   KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_BSPC,
+  CMD_TAB,   ALTSH_TAB, _______, _______, _______,                   KC_INS,  KC_HOME, KC_UP,   KC_END,  KC_MINS,
   SFCTL_TAB, LCTL_TAB,  _______, _______, _______,                   KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, S(KC_QUOT),
   KC_LSFT,   _______,   _______, _______, _______,                   KC_PGDN, _______, _______, _______, KC_QUOT,
   _______,   _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
